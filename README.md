@@ -19,9 +19,14 @@ install it yourself as:
   @type tail
   path "#{ENV['LOCALAPPDATA']}/UiPath/Logs/%Y-%m-%d_Execution.log"
   pos_file "#{ENV['LOCALAPPDATA']}/UiPath/Logs/Execution_log.pos"
-  format uipath
-  encoding Windows-31J
+  # Deprecated parameter. Use <parse> instead. https://docs.fluentd.org/input/tail#format
+  # format uipath
+  # encoding Windows-31J
   tag uipath
+  <parse>
+    @type uipath
+    encoding "UTF-8"
+  </parse>
 </source>
 
 <match uipath>
