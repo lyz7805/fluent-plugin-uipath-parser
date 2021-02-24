@@ -25,9 +25,23 @@ install it yourself as:
   tag uipath
   <parse>
     @type uipath
-    encoding "UTF-8"
+    encoding UTF-8
   </parse>
 </source>
+
+<filter uipath>
+  @type stdout
+</filter>
+
+<match uipath>
+  @type elasticsearch
+  host localhost
+  port 9200
+  logstash_format true
+  include_timestamp true
+  logstash_prefix log-fluentd-${tag}
+  logstash_dateformat %Y-%m-%d
+</match>
 
 <match uipath>
   @type s3
